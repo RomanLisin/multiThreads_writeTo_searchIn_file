@@ -36,25 +36,35 @@ public class InputManager {
         System.out.println("Два пустых вводда подряд завершают ввод.");
 
         int empty = 0;
-        while (empty < 1) {
+        while (true) { //(empty < 1) {
             String input = scanner.nextLine();
             if (input.trim().isEmpty()) {
                 empty++;
+                if (empty == 1){
+                    if(list.isEmpty()){
+                        System.out.println("Нет введенных чисел.");
+                        System.exit(0);//завершаем программу
+                    } else {
+                        break;
+                    }
+                }
             } else {
                 empty = 0; // сбрасываем счетчик
-            }
+
             try {
                 int num = Integer.parseInt(input.trim());
                 list.add(num);
             } catch (NumberFormatException e) {
                 System.out.println("Ошибка: '" + input + "' не является целым числом");
             }
+            }
         }
-        int[] result = new int[list.size()];
-        for (int i = 0; i < list.size(); i++) {
-            result[i] = list.get(i);
-        }
-
-        return result;
+//        int[] result = new int[list.size()];
+//        for (int i = 0; i < list.size(); i++) {
+//            result[i] = list.get(i);
+//        }
+//
+//        return result;
+        return list.stream().mapToInt(Integer::intValue).toArray();
     }
 }
