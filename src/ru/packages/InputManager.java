@@ -36,7 +36,7 @@ public class InputManager {
         System.out.println("Два пустых вводда подряд завершают ввод.");
 
         int empty = 0;
-        while (empty < 2) {
+        while (empty < 1) {
             String input = scanner.nextLine();
             if (input.trim().isEmpty()) {
                 empty++;
