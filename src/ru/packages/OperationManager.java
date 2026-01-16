@@ -1,5 +1,8 @@
 package ru.packages;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class OperationManager {
 
 
@@ -17,6 +20,20 @@ public class OperationManager {
             if (minNum>arr[i])minNum=arr[i];
         }
         return minNum;
+    }
+
+    public BigDecimal findSum(int[] array){
+        BigDecimal sum = BigDecimal.ZERO;
+        for(int num: array){
+            sum = sum.add(BigDecimal.valueOf(num));
+        }
+        return sum;
+    }
+
+    public BigDecimal findAverage(int[] array){
+        if(array.length==0) return BigDecimal.ZERO;
+        return findSum(array).divide(BigDecimal.valueOf(array.length),
+                RoundingMode.HALF_UP);
     }
 }
 
