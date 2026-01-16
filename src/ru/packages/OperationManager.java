@@ -2,6 +2,8 @@ package ru.packages;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OperationManager {
 
@@ -34,6 +36,22 @@ public class OperationManager {
         if(array.length==0) return BigDecimal.ZERO;
         return findSum(array).divide(BigDecimal.valueOf(array.length),
                 RoundingMode.HALF_UP);
+    }
+
+    public int[] findEven(int[] array){
+        List<Integer> evenArray = new ArrayList<>();
+        for(int i=0;i<array.length; i++){
+            if(array[i]%2==0) evenArray.add(array[i]);
+        }
+        return evenArray.stream().mapToInt(Integer::intValue).toArray();
+
+    }
+    public int[] findOdd(int[] array){
+        List<Integer> oddArray = new ArrayList<>();
+        for(int i=0;i<array.length;i++){
+            if(array[i]%2!=0) oddArray.add(array[i]);
+        }
+        return  oddArray.stream().mapToInt(Integer::intValue).toArray();
     }
 }
 
