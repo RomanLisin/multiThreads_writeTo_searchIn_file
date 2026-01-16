@@ -8,16 +8,16 @@ void main() {
 
     array = inputManager.getIntArray();
 
-    Thread findSum = new Thread(() -> {
+    Thread calculateSum = new Thread(() -> {
         System.out.println("Сумма всех элементов: " + operationManager.findSum(array));
     });
 
     Runnable average = () -> {
-        System.out.printf("Среднее значение всех элементов: " + operationManager.findAverage(array));
+        System.out.println("Среднее значение всех элементов: " + operationManager.findAverage(array));
     };
-    Thread findAverage = new Thread(average);
+    Thread calculateAverage = new Thread(average);
 
-    findSum.start();
-    findAverage.start();
+    calculateSum.start();
+    calculateAverage.start();
 
 }
