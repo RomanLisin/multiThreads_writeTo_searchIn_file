@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FileManager {
     public int[] readNumbersFromFile(String filePath) throws IOException {
@@ -24,7 +25,10 @@ public class FileManager {
     }
 
     public void writeNumbersToFileByCleanOld(String filePath, int[] numbers) throws IOException {
+        String content = Arrays.stream(numbers)  //toString(Arrays.stream(numbers).toArray());
+                               .mapToObj(String::valueOf)
+                               .collect(Collectors.joining(" "));
         Path path = Path.of(filePath);
-        Files.write(path, Arrays.toString(Arrays.stream(numbers).toArray()).getBytes());
+        Files.write(path, content.getBytes());
     }
 }
