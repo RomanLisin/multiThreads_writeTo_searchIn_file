@@ -1,26 +1,34 @@
 import ru.packages.InputManager;
 import ru.packages.OperationManager;
 
-void main() {
+void main() throws ExecutionException, InterruptedException {
     InputManager inputManager = new InputManager();
     OperationManager operationManager = new OperationManager();
 
     int[] array;
 
     array = inputManager.getIntArray();
+    ExecutorService executor = Executors.newFixedThreadPool(2);
+    Future<Integer> futureMax = (Future<Integer>) executor.submit(() -> {
+        operationManager.getMax(array);
+    });
+    Future<Integer> futureMin = (Future<Integer>) executor.submit(() -> {
+        operationManager.getMin(array);
+    });
+//    Runnable max = () -> {
+//        System.out.println("Максимальное число из введенных: " + operationManager.getMax(array));
+//    };
+//    Runnable min = () -> {
+//        System.out.println("Минимальное число из введенных: " + operationManager.getMin(array));
+//    };
 
-    Runnable max = () -> {
-        System.out.println("Максимальное число из введенных: " + operationManager.getMax(array));
-    };
-    Runnable min = () -> {
-        System.out.println("Минимальное число из введенных: " + operationManager.getMin(array));
-    };
+//    Thread maxThrd = new Thread(max);
+//    Thread minThrd = new Thread(min);
 
-    Thread maxThrd = new Thread(max);
-    Thread minThrd = new Thread(min);
-
-    maxThrd.start();
-    minThrd.start();
+//    maxThrd.start();
+//    minThrd.start();
+    System.out.println("Максимальное число из введенных: " + futureMax.get());
+    System.out.println("Минимальное число из введенных: " + futureMin.get());
 }
 
 
