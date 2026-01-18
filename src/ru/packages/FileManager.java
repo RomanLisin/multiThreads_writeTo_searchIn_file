@@ -24,12 +24,13 @@ public class FileManager {
         return array;
     }
 
-    public void writeNumbersToFileByCleanOld(String filePath, int[] numbers) throws IOException {
+    public int writeNumbersToFileByCleanOld(String filePath, int[] numbers) throws IOException {
         String content = Arrays.stream(numbers)  //toString(Arrays.stream(numbers).toArray());
                                .mapToObj(String::valueOf)
                                .collect(Collectors.joining(" "));
         Path path = Path.of(filePath);
         Files.write(path, content.getBytes());
+        return numbers.length;
     }
 
     public int[] findWordPositions(String filePath, String targetWord){
